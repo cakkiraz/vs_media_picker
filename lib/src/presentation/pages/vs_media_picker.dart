@@ -1,15 +1,13 @@
 // ignore_for_file: unnecessary_null_comparison
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:photo_manager/photo_manager.dart';
-import 'package:vs_media_picker/vs_media_picker.dart';
 import 'package:vs_media_picker/src/core/functions.dart';
 import 'package:vs_media_picker/src/presentation/pages/vs_media_picker_controller.dart';
 import 'package:vs_media_picker/src/presentation/widgets/gallery_grid/gallery_grid_view.dart';
 import 'package:vs_media_picker/src/presentation/widgets/select_album_path/current_path_selector.dart';
+import 'package:vs_media_picker/vs_media_picker.dart';
 
 class VSMediaPicker extends StatefulWidget {
   /// maximum images allowed (default 2)
@@ -87,7 +85,7 @@ class VSMediaPicker extends StatefulWidget {
   /// image quality thumbnail
   final int? thumbnailQuality;
   const VSMediaPicker(
-      {Key? key,
+      {super.key,
       this.maxPickImages = 2,
       this.singlePick = true,
       this.appBarColor = Colors.black,
@@ -112,8 +110,7 @@ class VSMediaPicker extends StatefulWidget {
       this.selectedCheckBackgroundColor = Colors.white,
       this.onlyImages = false,
       this.onlyVideos = false,
-      this.thumbnailQuality})
-      : super(key: key);
+      this.thumbnailQuality});
 
   @override
   State<VSMediaPicker> createState() => _VSMediaPickerState();
@@ -182,14 +179,11 @@ class _VSMediaPickerState extends State<VSMediaPicker> {
                     dropdownRelativeKey: GlobalKey(),
                     provider: provider,
                     appBarColor: widget.appBarColor,
-                    appBarIconColor:
-                        widget.appBarIconColor ?? const Color(0xFFB2B2B2),
+                    appBarIconColor: widget.appBarIconColor ?? const Color(0xFFB2B2B2),
                     appBarTextColor: widget.appBarTextColor,
                     albumTextColor: widget.albumTextColor,
-                    albumDividerColor:
-                        widget.albumDividerColor ?? const Color(0xFF484848),
-                    albumBackGroundColor:
-                        widget.albumBackGroundColor ?? const Color(0xFF333333),
+                    albumDividerColor: widget.albumDividerColor ?? const Color(0xFF484848),
+                    albumBackGroundColor: widget.albumBackGroundColor ?? const Color(0xFF333333),
                     appBarLeadingWidget: widget.appBarLeadingWidget,
                   ),
                 ),
@@ -203,29 +197,24 @@ class _VSMediaPickerState extends State<VSMediaPicker> {
                   child: provider != null
                       ? AnimatedBuilder(
                           animation: provider.currentAlbumNotifier,
-                          builder: (BuildContext context, child) =>
-                              GalleryGridView(
+                          builder: (BuildContext context, child) => GalleryGridView(
                             path: provider.currentAlbum,
                             thumbnailQuality: widget.thumbnailQuality ?? 200,
                             provider: provider,
                             padding: widget.gridPadding,
                             childAspectRatio: widget.childAspectRatio ?? 0.5,
                             crossAxisCount: widget.crossAxisCount ?? 3,
-                            gridViewBackgroundColor:
-                                widget.gridViewBackgroundColor,
+                            gridViewBackgroundColor: widget.gridViewBackgroundColor,
                             gridViewController: widget.gridViewController,
                             gridViewPhysics: widget.gridViewPhysics,
                             imageBackgroundColor: widget.imageBackgroundColor,
-                            selectedBackgroundColor:
-                                widget.selectedBackgroundColor,
+                            selectedBackgroundColor: widget.selectedBackgroundColor,
                             selectedCheckColor: widget.selectedCheckColor,
                             thumbnailBoxFix: widget.thumbnailBoxFix,
-                            selectedCheckBackgroundColor:
-                                widget.selectedCheckBackgroundColor,
+                            selectedCheckBackgroundColor: widget.selectedCheckBackgroundColor,
                             onAssetItemClick: (asset, index) async {
                               provider.pickEntity(asset);
-                              GalleryFunctions.getFile(asset)
-                                  .then((value) async {
+                              GalleryFunctions.getFile(asset).then((value) async {
                                 /// add metadata to map list
                                 provider.pickPath(PickedAssetModel(
                                   id: asset.id,

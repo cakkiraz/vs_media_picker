@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vs_media_picker/src/core/functions.dart';
 
-typedef DropdownWidgetBuilder<T> = Widget Function(
-    BuildContext context, ValueSetter<T> close);
+typedef DropdownWidgetBuilder<T> = Widget Function(BuildContext context, ValueSetter<T> close);
 
 class DropDown<T> extends StatefulWidget {
   final Widget child;
@@ -12,19 +11,18 @@ class DropDown<T> extends StatefulWidget {
   final GlobalKey? relativeKey;
 
   const DropDown({
-    Key? key,
+    super.key,
     required this.child,
     required this.dropdownWidgetBuilder,
     this.onResult,
     this.onShow,
     this.relativeKey,
-  }) : super(key: key);
+  });
   @override
   DropDownState<T> createState() => DropDownState<T>();
 }
 
-class DropDownState<T> extends State<DropDown<T>>
-    with TickerProviderStateMixin {
+class DropDownState<T> extends State<DropDown<T>> with TickerProviderStateMixin {
   FeatureController<T?>? controller;
   @override
   Widget build(BuildContext context) {

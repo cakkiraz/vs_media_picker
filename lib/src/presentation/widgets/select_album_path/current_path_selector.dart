@@ -31,7 +31,7 @@ class SelectedPathDropdownButton extends StatelessWidget {
   final Widget? appBarLeadingWidget;
 
   const SelectedPathDropdownButton(
-      {Key? key,
+      {super.key,
       required this.provider,
       required this.dropdownRelativeKey,
       required this.appBarTextColor,
@@ -40,8 +40,7 @@ class SelectedPathDropdownButton extends StatelessWidget {
       required this.albumBackGroundColor,
       required this.albumDividerColor,
       required this.albumTextColor,
-      this.appBarLeadingWidget})
-      : super(key: key);
+      this.appBarLeadingWidget});
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +53,7 @@ class SelectedPathDropdownButton extends StatelessWidget {
           Expanded(
             child: DropDown<AssetPathEntity>(
               relativeKey: dropdownRelativeKey!,
-              child: ((context) =>
-                  buildButton(context, arrowDownNotifier))(context),
+              child: ((context) => buildButton(context, arrowDownNotifier))(context),
               dropdownWidgetBuilder: (BuildContext context, close) {
                 /// change path button
                 return ChangePathWidget(
@@ -127,11 +125,7 @@ class SelectedPathDropdownButton extends StatelessWidget {
               child: Text(
                 provider.currentAlbum!.name,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    color: appBarTextColor,
-                    fontSize: 18,
-                    letterSpacing: 0.8,
-                    fontWeight: FontWeight.w500),
+                style: TextStyle(color: appBarTextColor, fontSize: 18, letterSpacing: 0.8, fontWeight: FontWeight.w500),
               ),
             ),
             const Spacer(),

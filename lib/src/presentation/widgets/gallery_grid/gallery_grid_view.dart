@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:vs_media_picker/src/presentation/pages/vs_media_picker_controller.dart';
@@ -57,7 +55,7 @@ class GalleryGridView extends StatefulWidget {
   final int? thumbnailQuality;
 
   const GalleryGridView(
-      {Key? key,
+      {super.key,
       required this.path,
       required this.provider,
       this.onAssetItemClick,
@@ -73,8 +71,7 @@ class GalleryGridView extends StatefulWidget {
       this.imageBackgroundColor = Colors.white,
       this.thumbnailBoxFix = BoxFit.cover,
       this.selectedCheckBackgroundColor = Colors.white,
-      this.thumbnailQuality = 200})
-      : super(key: key);
+      this.thumbnailQuality = 200});
 
   @override
   GalleryGridViewState createState() => GalleryGridViewState();
@@ -120,8 +117,7 @@ class GalleryGridViewState extends State<GalleryGridView> {
                   ),
 
                   /// render thumbnail
-                  itemBuilder: (context, index) =>
-                      _buildItem(context, index, widget.provider),
+                  itemBuilder: (context, index) => _buildItem(context, index, widget.provider),
                   itemCount: widget.provider.assetCount,
                   addRepaintBoundaries: true,
                 ),
@@ -131,15 +127,13 @@ class GalleryGridViewState extends State<GalleryGridView> {
         : Container();
   }
 
-  Widget _buildItem(
-      BuildContext context, index, VSMediaPickerController provider) {
+  Widget _buildItem(BuildContext context, index, VSMediaPickerController provider) {
     return GestureDetector(
       /// on tap thumbnail
       onTap: () async {
         var asset = cacheMap[index];
         if (asset == null) {
-          asset = (await widget.path!
-              .getAssetListRange(start: index, end: index + 1))[0];
+          asset = (await widget.path!.getAssetListRange(start: index, end: index + 1))[0];
           cacheMap[index] = asset;
         }
         widget.onAssetItemClick?.call(asset, index);
@@ -150,8 +144,7 @@ class GalleryGridViewState extends State<GalleryGridView> {
     );
   }
 
-  Widget _buildScrollItem(
-      BuildContext context, int index, VSMediaPickerController provider) {
+  Widget _buildScrollItem(BuildContext context, int index, VSMediaPickerController provider) {
     /// load cache images
     final asset = cacheMap[index];
     if (asset != null) {
